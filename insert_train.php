@@ -8,6 +8,8 @@ if(isset($_REQUEST['insert']))
        $start_time = mysqli_real_escape_string($con,$_POST['start_time']);
        $destination_time =  mysqli_real_escape_string($con,$_POST['destination_time']);
        $on_sunday = mysqli_real_escape_string($con,$_POST['on_sunday']);
+       $source_rank =mysqli_real_escape_string($con,$_POST['source_rank']);
+       $destination_rank = mysqli_real_escape_string($con,$_POST['destination_rank']);
        $tempp= strtotime($start_time);     //conrting  string  to time 
        $start_t= date('H:i',$tempp);		//extracting only hours and minute
        $tempp2 = strtotime($destination_time);       //conrting  string  to time 
@@ -25,7 +27,7 @@ if(isset($_REQUEST['insert']))
        }else{
        	//********************************* insert code for harbour line **************************
        	if($line=="h"){
-       		$in_train = "insert into trains(start,destination,start_time,destination_time,h,on_sunday) values('$start','$destination','$start_t','$destination_t',1,$on_sunday)";
+       		$in_train = "insert into trains(start,destination,start_time,destination_time,h,on_sunday,source_rank,destination_rank) values('$start','$destination','$start_t','$destination_t',1,$on_sunday,$source_rank,$destination_rank)";
        $run_in_train = mysqli_query($con,$in_train);
        if($run_in_train){
        	echo "<script>alert('record added')</script>";
@@ -36,7 +38,7 @@ if(isset($_REQUEST['insert']))
        	}
        	// ****************************for central line*******************
        	elseif($line=="c"){
-       		$in_train = "insert into trains(start,destination,start_time,destination_time,c,on_sunday) values('$start','$destination','$start_t','$destination_t',1,$on_sunday)";
+       		$in_train = "insert into trains(start,destination,start_time,destination_time,c,on_sunday,source_rank,destination_rank) values('$start','$destination','$start_t','$destination_t',1,$on_sunday,$source_rank,$destination_rank)";
        $run_in_train = mysqli_query($con,$in_train);
        if($run_in_train){
        	echo "<script>alert('record added')</script>";
@@ -45,10 +47,10 @@ if(isset($_REQUEST['insert']))
        	echo "<br>data not inserted";
        }
 
-//*************************8 for western line *******************
+//************************* for western line *******************
        	}
        	elseif($line=="w"){
-       		$in_train = "insert into trains(start,destination,start_time,destination_time,w,on_sunday) values('$start','$destination','$start_t','$destination_t',1,$on_sunday)";
+       		$in_train = "insert into trains(start,destination,start_time,destination_time,w,on_sunday,source_rank,destination_rank) values('$start','$destination','$start_t','$destination_t',1,$on_sunday,$source_rank,$destination_rank)";
        $run_in_train = mysqli_query($con,$in_train);
        if($run_in_train){
        	echo "<script>alert('record added')</script>";
@@ -56,11 +58,11 @@ if(isset($_REQUEST['insert']))
        else{
        	echo "<br>data not inserted";
        }
-//*******************************8for trans harbour line *****************
+//*******************************for trans harbour line *****************
 
        	}
        	elseif($line=="th"){
-       		$in_train = "insert into trains(start,destination,start_time,destination_time,th,on_sunday) values('$start','$destination','$start_t','$destination_t',1,$on_sunday)";
+       		$in_train = "insert into trains(start,destination,start_time,destination_time,th,on_sunday,source_rank,destination_rank) values('$start','$destination','$start_t','$destination_t',1,$on_sunday,$source_rank,$destination_rank)";
        $run_in_train = mysqli_query($con,$in_train);
        if($run_in_train){
        	echo "<script>alert('record added')</script>";
@@ -121,6 +123,14 @@ if(isset($_REQUEST['insert']))
 			<td> ON Sunday? </td>
 			<td colspan="2"> <input type="radio" name="on_sunday" value="1">Yes <input type="radio" name="on_sunday" value="0">No  </td>
 		</tr>
+              <tr>
+                     <td>Source Station Rank</td>
+                     <td><input type="number" name="source_rank" required="required"></td>
+              </tr>
+              <tr>
+                     <td>Destination Station Rank</td>
+                     <td><input type="number" name="destination_rank" required="required"></td>
+              </tr>
 		<tr>
 			<td colspan="3"><center><input type="submit" name="insert" value="Insert"></center></td>
 		</tr>

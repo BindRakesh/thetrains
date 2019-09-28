@@ -63,7 +63,7 @@ if(isset($_REQUEST['insert']))
 <!DOCTYPE html>
 <html lang="en">
 <head><title>
-	Insert Train Details
+	Insert Station Details
 </title>
 <style>
 .mar{
