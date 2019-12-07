@@ -1,5 +1,6 @@
 <?php 
 include("include/db.php");
+date_default_timezone_set("Asia/kolkata");  //setting default time zone to india
 
 ?>
 <!DOCTYPE html>
@@ -115,7 +116,7 @@ if($source!="" && $destination!=""){
 	echo "<br>source rank:$rank_a <br>destination rank:$rank_b";
 
 //*****************************seleting train details*********************************
-	echo "<table style='border:1px solid #ddd;'>
+	echo "<table style='border:1  px solid #ddd;'>
 	<tr>
 	<th>From</th>
 	<th>start</th>
@@ -152,6 +153,35 @@ if($source!="" && $destination!=""){
 			$start_time = $res_sel_train['start_time'];
 			$destination = $res_sel_train['destination'];
 			$destination_time = $res_sel_train['destination_time'];
+
+// ----------------------rahul's code for getting time difference ----------------
+			//--------------begining r1-----------------------------------
+			$checkTime = strtotime('09:00:59');
+			echo 'Check Time : '.date('H:i:s', $checkTime);
+			echo '<hr>';
+			
+			$loginTime = strtotime('09:01:00');
+			$diff = $checkTime - $loginTime;
+			echo 'Login Time : '.date('H:i:s', $loginTime).'<br>';
+			echo ($diff < 0)? 'Late!' : 'Right time!'; echo '<br>';
+			echo 'Time diff in sec: '.abs($diff);
+			
+			echo '<hr>';
+			
+			$loginTime = strtotime('09:00:59');
+			$diff = $checkTime - $loginTime;
+			echo 'Login Time : '.date('H:i:s', $loginTime).'<br>';
+			echo ($diff < 0)? 'Late!' : 'Right time!';
+			
+			echo '<hr>';
+			-
+			$loginTime = strtotime('09:00:00');
+			$diff = $checkTime - $loginTime;
+			echo 'Login Time : '.date('H:i:s', $loginTime).'<br>';
+			echo ($diff < 0)? 'Late!' : 'Right time!';
+
+			//---------------end of code r1 ----------------------------
+
 			echo"
 			<tr>
 			<td>'$start'</td>
